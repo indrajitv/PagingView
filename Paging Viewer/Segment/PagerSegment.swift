@@ -11,8 +11,10 @@ class PagerSegment: UIView {
     
     var items: [PagerSegmentItem]? {
         didSet {
-            collectionView.reloadData()
-            selectionBar.setWidth(width: UIScreen.main.bounds.width / CGFloat(items?.count ?? 1))
+            self.collectionView.reloadData()
+            if selectionBar.frame.width == 0 {
+                selectionBar.setWidth(width: UIScreen.main.bounds.width / CGFloat(items?.count ?? 1))
+            }
         }
     }
     
@@ -77,7 +79,8 @@ class PagerSegment: UIView {
         let _items = self.items
         let referenceCollectionCellsCount = self.pagerViewCollectionReference?.numberOfItems(inSection: 0) ?? 0
         
-        if indexPath.item < referenceCollectionCellsCount {
+        if indexPath.item < referenceCollectionCellsCount,
+           _items?.count ?? 0 > indexPath.item {
             
             _items?.forEach({ $0.isSelected = false })
             _items?[indexPath.item].isSelected = true
@@ -91,7 +94,16 @@ class PagerSegment: UIView {
             
             if attribute.showSelectionBar {
                 let oneCellSize: CGFloat = UIScreen.main.bounds.width / CGFloat((items?.count ?? 1))
-                self.xAxisOfSelectionBar?.constant = oneCellSize * CGFloat(indexPath.item)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.xAxisOfSelectionBar?.constant = oneCellSize * CGFloat(indexPath.item)
+                    UIView.animate(withDuration: 0.4,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.9,
+                                   initialSpringVelocity: 1,
+                                   options: .curveEaseOut) {
+                        self.layoutIfNeeded()
+                    }
+                }
             }
         } else {
             print("No cell found for the index item", indexPath.item, "Did you provide the corresponding cell ?")

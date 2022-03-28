@@ -30,7 +30,7 @@ extension PagerView: UICollectionViewDelegateFlowLayout {
                                                       height: collectionView.frame.height)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offSet = scrollView.contentOffset.x
         let width = scrollView.frame.width
         let horizontalCenter = width / 2

@@ -21,7 +21,9 @@ class ViewController: UIViewController {
             
                 .init(title: "Item 4", id: "item_2", textColor: (selected: .darkGray, unSelected: .darkGray), backgroundColor: (selected: .red, unSelected: .lightGray), fonts: (selected: .systemFont(ofSize: 14, weight: .bold), unSelected: .systemFont(ofSize: 14, weight: .regular)), isSelected: false),
             
-                .init(title: "Item 5", id: "item_2", textColor: (selected: .darkGray, unSelected: .darkGray), backgroundColor: (selected: .red, unSelected: .lightGray), fonts: (selected: .systemFont(ofSize: 14, weight: .bold), unSelected: .systemFont(ofSize: 14, weight: .regular)), isSelected: false)
+                .init(title: "Item 5", id: "item_2", textColor: (selected: .darkGray, unSelected: .darkGray), backgroundColor: (selected: .red, unSelected: .lightGray), fonts: (selected: .systemFont(ofSize: 14, weight: .bold), unSelected: .systemFont(ofSize: 14, weight: .regular)), isSelected: false),
+            
+                .init(title: "Item 6", id: "item_2", textColor: (selected: .darkGray, unSelected: .darkGray), backgroundColor: (selected: .red, unSelected: .lightGray), fonts: (selected: .systemFont(ofSize: 14, weight: .bold), unSelected: .systemFont(ofSize: 14, weight: .regular)), isSelected: false)
         ]
         return segment
     }()
