@@ -9,7 +9,7 @@ import UIKit
 
 
 class ViewController: UIViewController {
-  
+    
     let segment: PagerSegment = {
         let segment = PagerSegment(attributes: SegmentAttribute())
         segment.items = [
@@ -29,28 +29,78 @@ class ViewController: UIViewController {
     }()
     lazy var pagerView = PagerView(attributes: .init(backgroundColor: .systemRed),
                                    pagerSegment: self.segment)
-   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         self.view.addSubview(pagerView)
         pagerView.setFullOnSuperView()
-        
-        let firstCell = Cell1()
-        self.pagerView.cells = [firstCell, Cell1(),  Cell1(), Cell1(), Cell1(), Cell1()]
+     
+        self.pagerView.cells = [CellForViewCotnroller1(), CellForViewCotnroller1(), CellForViewCotnroller1(), CellForViewCotnroller1(), CellForViewCotnroller1(), CellForViewCotnroller1(), CellForViewCotnroller1(), CellForViewCotnroller1()]
     }
-
+    
 }
 
-class Cell1: UICollectionViewCell, PagerViewCellDelegate {
-   override init(frame: CGRect) {
+
+class FirstVC: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .random
+        
+        print("view did load for", self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("view will appear for", self)
+        callAPI()
+    }
+    
+    func callAPI() {
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        print("viewWillDisappear", self)
+    }
+}
+
+class CellForViewCotnroller1: UICollectionViewCell, PagerViewCellDelegate {
+    let viewCotnroller1 = FirstVC()
+
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .random
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+      
+        if self.viewCotnroller1.view.superview == nil {
+            self.addSubviews(views: [self.viewCotnroller1.view])
+            self.viewCotnroller1.view.setFullOnSuperView(withSpacing: 50)
+        }
+    }
+    
+    func willDisplayCell(indexPath: IndexPath) {
+        viewCotnroller1.viewWillAppear(false)
+    }
+    
 }
+

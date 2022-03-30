@@ -8,7 +8,9 @@
 import UIKit
 
 extension PagerView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cells[indexPath.item].willDisplayCell(indexPath: indexPath)
+     }
 }
 
 extension PagerView: UICollectionViewDataSource {

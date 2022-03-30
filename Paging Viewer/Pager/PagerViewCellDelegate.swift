@@ -9,6 +9,7 @@ import UIKit
 
 protocol PagerViewCellDelegate: UICollectionViewCell {
     var cellId: String { get }
+    func willDisplayCell(indexPath: IndexPath)
 }
 
 extension PagerViewCellDelegate {
