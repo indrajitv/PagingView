@@ -9,7 +9,10 @@ import UIKit
 
 extension PagerView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cells[indexPath.item].willDisplayCell(indexPath: indexPath)
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as? PagerViewCellDelegate {
+            cell.willDisplayCell(indexPath: indexPath)
+        }
      }
 }
 
@@ -20,8 +23,8 @@ extension PagerView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellAtIndex = cells[indexPath.item]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellAtIndex.cellId, for: indexPath)
+        let type = self.cells[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: type.cellId, for: indexPath)
         return cell
     }
 }

@@ -12,10 +12,10 @@ class PagerView: UIView {
     let attributes: PagerViewAttribute
     var pagerSegment: PagerSegment?
      
-    var cells: [PagerViewCellDelegate] = [] {
+    var cells: [PagerViewCellDelegate.Type] = [] {
         didSet {
             self.cells.forEach({
-                self.collectionView.register($0.classForCoder.self,
+                self.collectionView.register($0,
                                              forCellWithReuseIdentifier: $0.cellId)
             })
             collectionView.reloadData()
