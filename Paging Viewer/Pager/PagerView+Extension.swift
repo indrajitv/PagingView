@@ -10,7 +10,7 @@ import UIKit
 extension PagerView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if let cell = collectionView.cellForItem(at: indexPath) as? PagerViewCellDelegate {
+        if let cell = cell as? PagerViewCellDelegate {
             cell.willDisplayCell(indexPath: indexPath)
         }
      }
